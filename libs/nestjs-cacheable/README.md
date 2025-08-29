@@ -5,7 +5,7 @@ A flexible and powerful caching module for NestJS that provides an easy-to-use A
 ## Installation
 
 ```bash
-pnpm add @m8a-io/nestjs-cacheable cacheable ioredis keyv @keyv/redis
+pnpm add @m8a/nestjs-cacheable cacheable ioredis keyv @keyv/redis
 ```
 
 ## Usage
