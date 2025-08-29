@@ -1,0 +1,2 @@
+export const CACHEABLE_OPTIONS = 'CACHEABLE_OPTIONS'
+export const CACHEABLE = 'CACHEABLE'

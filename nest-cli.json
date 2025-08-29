@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "@m8a-io/nestjs-cacheable": {
+      "type": "library",
+      "root": "libs/nestjs-cacheable",
+      "entryFile": "index",
+      "sourceRoot": "libs/nestjs-cacheable/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/nestjs-cacheable/tsconfig.lib.json"
+      }
+    }
+  }
+}
