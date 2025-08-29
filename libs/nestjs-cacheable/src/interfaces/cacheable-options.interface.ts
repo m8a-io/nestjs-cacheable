@@ -1,5 +1,5 @@
 import { ModuleMetadata } from '@nestjs/common/interfaces'
-import { Keyv } from 'keyv'
+import  Keyv from 'keyv'
 import Store from 'keyv'
 
 export type KeyvStoreAdapter = Store<any>

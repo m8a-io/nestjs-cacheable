@@ -1,5 +1,5 @@
 {
-  "name": "@m8a-io/nestjs-cacheable",
+  "name": "@m8a/nestjs-cacheable",
   "version": "0.1.0-alpha.1",
   "description": "A flexible and powerful caching module for NestJS with tiered caching and fault tolerance.",
   "author": "m8a-io",
@@ -7,22 +7,26 @@
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.lib.json"
+    "prepare": "rimraf ../../dist",
+    "build": "pnpm run prepare && tsc -p tsconfig.lib.json && cp package.json ../../dist/ && cp README.md ../../dist/"
   },
   "peerDependencies": {
+    "@keyv/redis": "^2.0.0",
     "cacheable": "^1.0.0",
     "ioredis": "^5.0.0",
-    "keyv": "^4.0.0",
-    "@keyv/redis": "^2.0.0",
+    "keyv": "^5.0.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.0.0"
+    "rxjs": "^7.8.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/m8a-io/nestjs-cacheable.git"
+    "url": "git+https://github.com/m8a-io/nestjs-cacheable.git"
   },
   "bugs": {
     "url": "https://github.com/m8a-io/nestjs-cacheable/issues"
   },
-  "homepage": "https://github.com/m8a-io/nestjs-cacheable#readme"
+  "homepage": "https://github.com/m8a-io/nestjs-cacheable#readme",
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
 }

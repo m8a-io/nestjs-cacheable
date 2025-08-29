@@ -3,8 +3,7 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true,
-    "webpack": true
+    "deleteOutDir": true
   },
   "projects": {
     "@m8a-io/nestjs-cacheable": {
@@ -13,7 +12,8 @@
       "entryFile": "index",
       "sourceRoot": "libs/nestjs-cacheable/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/nestjs-cacheable/tsconfig.lib.json"
+        "tsConfigPath": "libs/nestjs-cacheable/tsconfig.lib.json",
+        "webpack": false
       }
     }
   }
