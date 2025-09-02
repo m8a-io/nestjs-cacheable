@@ -13,6 +13,11 @@
     "prepare": "rimraf ./dist",
     "build": "pnpm run prepare && tsc -p tsconfig.lib.json && cp package.json ./dist/ && cp README.md ./dist/"
   },
+  "scripts": {
+    "clean:dist": "rimraf dist",
+    "build": "pnpm run clean:dist && tsc -p tsconfig.lib.json",
+    "prepublishOnly": "pnpm run build && cp package.json ./dist/ && cp README.md ./dist/"
+  },
   "peerDependencies": {
     "@keyv/redis": "^5.0.2",
     "cacheable": "^1.0.0",
