@@ -6,6 +6,9 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepare": "rimraf ./dist",
     "build": "pnpm run prepare && tsc -p tsconfig.lib.json && cp package.json ./dist/ && cp README.md ./dist/"
