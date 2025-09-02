@@ -1,6 +1,6 @@
 {
   "name": "@m8a/nestjs-cacheable",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "description": "A flexible and powerful caching module for NestJS with tiered caching and fault tolerance.",
   "author": "m8a-io",
   "license": "MIT",
