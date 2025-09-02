@@ -1,11 +1,14 @@
 {
   "name": "@m8a/nestjs-cacheable",
-  "version": "0.1.0-alpha.4",
+  "version": "0.1.0-alpha.5",
   "description": "A flexible and powerful caching module for NestJS with tiered caching and fault tolerance.",
   "author": "m8a-io",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepare": "rimraf ./dist",
     "build": "pnpm run prepare && tsc -p tsconfig.lib.json && cp package.json ./dist/ && cp README.md ./dist/"
