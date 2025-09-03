@@ -11,6 +11,28 @@ This file tracks the remaining features and tasks for the `nestjs-cacheable` mod
 - [ ] **Key Sanitization**: Implement sanitization for cache keys to prevent security vulnerabilities.
 - [ ] **Observability and Metrics**: Implement the `MetricsService` and expose cache metrics (hits, misses, etc.) in a Prometheus-compatible format.
 
+## Expose Full `cacheable` API
+
+- [ ] `setMany([{key, value, ttl?}])`
+- [ ] `get(key, { raw: true })`
+- [ ] `getMany([keys])`
+- [ ] `getMany([keys], { raw: true })`
+- [ ] `has(key)`
+- [ ] `hasMany([keys])`
+- [ ] `take(key)`
+- [ ] `takeMany([keys])`
+- [ ] `deleteMany([keys])`
+- [ ] `clear()`
+- [ ] `getOrSet(GetOrSetKey, valueFunction, GetOrSetFunctionOptions)`
+- [ ] `onHook(hook, callback)`
+- [ ] `removeHook(hook)`
+- [ ] `on(event, callback)`
+- [ ] `removeListener(event, callback)`
+- [ ] `hash(object: any, algorithm = 'sha256'): string`
+- [ ] `namespace` getter/setter
+- [ ] `nonBlocking` getter/setter
+- [ ] `stats` getter
+
 ## Polish & New Features
 
 - [ ] **Custom `@Cacheable()` Decorator**: Create a single, ergonomic decorator that combines the functionality of `@UseInterceptors(CacheableInterceptor)` and `@CacheTTL()`.

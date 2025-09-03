@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger, OnModuleDestroy } from '@nestjs/common'
 import { CACHEABLE } from './constants'
 import { Cacheable } from 'cacheable'
+import { Keyv } from 'keyv'
 
 @Injectable()
 export class NestjsCacheableService implements OnModuleDestroy {
@@ -10,6 +11,14 @@ export class NestjsCacheableService implements OnModuleDestroy {
 
   async onModuleDestroy() {
     await this.disconnect()
+  }
+
+  get primary(): Keyv {
+    return this.cache.primary
+  }
+
+  get secondary(): Keyv | undefined {
+    return this.cache.secondary
   }
 
   async disconnect() {

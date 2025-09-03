@@ -12,6 +12,8 @@ describe('NestjsCacheableService', () => {
     set: jest.fn(),
     delete: jest.fn(),
     wrap: jest.fn(),
+    primary: 'primary-store' as any,
+    secondary: 'secondary-store' as any,
   }
 
   beforeEach(async () => {
@@ -56,5 +58,13 @@ describe('NestjsCacheableService', () => {
     const wrappedFn = service.wrap(fn, options)
     await wrappedFn()
     expect(cache.wrap).toHaveBeenCalledWith(fn, options)
+  })
+
+  it('should return the primary store', () => {
+    expect(service.primary).toBe('primary-store')
+  })
+
+  it('should return the secondary store', () => {
+    expect(service.secondary).toBe('secondary-store')
   })
 })
