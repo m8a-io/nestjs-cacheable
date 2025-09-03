@@ -1,5 +1,6 @@
 # compiled output
 /dist
+/libs/nestjs-cacheable/dist
 /node_modules
 /build
 
