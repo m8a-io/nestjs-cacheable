@@ -7,7 +7,6 @@ import {
   CacheableOptionsFactory,
 } from './interfaces/cacheable-options.interface'
 import { cacheableProvider } from './cacheable.provider'
-import { HealthService } from './health.service'
 
 @Module({})
 export class NestjsCacheableModule {
@@ -20,10 +19,9 @@ export class NestjsCacheableModule {
           useValue: options,
         },
         cacheableProvider,
-        HealthService,
         NestjsCacheableService,
       ],
-      exports: [HealthService, NestjsCacheableService],
+      exports: [NestjsCacheableService],
     }
   }
 
@@ -34,10 +32,9 @@ export class NestjsCacheableModule {
       providers: [
         ...this.createAsyncProviders(options),
         cacheableProvider,
-        HealthService,
         NestjsCacheableService,
       ],
-      exports: [HealthService, NestjsCacheableService],
+      exports: [NestjsCacheableService],
     }
   }
 

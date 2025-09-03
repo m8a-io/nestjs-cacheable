@@ -1,6 +1,5 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common'
-import { Observable, of } from 'rxjs'
-import { tap } from 'rxjs/operators'
+import { Observable, of, firstValueFrom } from 'rxjs'
 import { NestjsCacheableService } from './nestjs-cacheable.service'
 import { Reflector } from '@nestjs/core'
 import { CACHE_TTL_KEY } from './cache-ttl.decorator'
@@ -22,11 +21,9 @@ export class CacheableInterceptor implements NestInterceptor {
 
     const ttl = this.reflector.get<number>(CACHE_TTL_KEY, context.getHandler())
 
-    return next.handle().pipe(
-      tap((value) => {
-        this.cacheService.set(key, value, ttl)
-      }),
-    )
+    const value = await firstValueFrom(next.handle())
+    await this.cacheService.set(key, value, ttl)
+    return of(value)
   }
 
   private getCacheKey(context: ExecutionContext): string {

@@ -1,6 +1,6 @@
 # @m8a/nestjs-cacheable
 
-A flexible and powerful caching module for NestJS that provides an easy-to-use API for tiered caching (in-memory and Redis) with robust fault tolerance.
+A flexible and powerful caching module for NestJS that provides an easy-to-use API for tiered caching (in-memory and Redis).
 
 ## Installation
 
@@ -113,7 +113,3 @@ export class MyService {
   }
 }
 ```
-
-## Fault Tolerance
-
-The module is designed to be resilient. If a secondary Redis store is configured, the module will automatically monitor its connection status. If the Redis connection is lost, the module will gracefully bypass the cache and log a warning, ensuring your application remains available.

@@ -1,8 +1,6 @@
 import { ModuleMetadata } from '@nestjs/common/interfaces'
 import  Keyv from 'keyv'
-import Store from 'keyv'
-
-export type KeyvStoreAdapter = Store<any>
+import type { KeyvStoreAdapter } from 'keyv'
 
 export interface CacheableOptions {
   primary?: Keyv | KeyvStoreAdapter

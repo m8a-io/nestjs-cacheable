@@ -1,11 +1,34 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { INestApplication, Controller, Get, UseInterceptors } from '@nestjs/common'
+import {
+  INestApplication,
+  Controller,
+  Get,
+  UseInterceptors,
+  Injectable,
+  Module,
+} from '@nestjs/common'
 import request from 'supertest'
 import { NestjsCacheableModule } from '../libs/nestjs-cacheable/src/nestjs-cacheable.module'
 import { CacheableInterceptor } from '../libs/nestjs-cacheable/src/cacheable.interceptor'
 import { CacheTTL } from '../libs/nestjs-cacheable/src/cache-ttl.decorator'
 import KeyvRedis from '@keyv/redis'
 import Keyv from 'keyv'
+
+// Mock Config for testing
+@Injectable()
+class Config {
+  CACHE_USERNAME = ''
+  CACHE_PASSWORD = ''
+  CACHE_HOST = 'localhost'
+  CACHE_PORT = 6379
+  CACHE_KEY_PREFIX = 'test-prefix'
+}
+
+@Module({
+  providers: [Config],
+  exports: [Config],
+})
+class ConfigModule {}
 
 // A mock controller to test the interceptor
 @Controller()
@@ -14,7 +37,7 @@ class TestController {
 
   @Get('/test')
   @UseInterceptors(CacheableInterceptor)
-  @CacheTTL(1000) // 1 second TTL
+  @CacheTTL(1000) // 10 second TTL
   getTestData() {
     this.callCount++
     return { data: 'test_data', callCount: this.callCount }
@@ -25,15 +48,24 @@ class TestController {
   }
 }
 
-describe('CacheableInterceptor (e2e)', () => {
+describe('CacheableInterceptor with registerAsync (e2e)', () => {
   let app: INestApplication
   let testController: TestController
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
-        NestjsCacheableModule.register({
-          secondary: new Keyv(new KeyvRedis('redis://localhost:6379')),
+        NestjsCacheableModule.registerAsync({
+          imports: [ConfigModule],
+          useFactory: (config: Config) => ({
+            secondary: new Keyv({
+              store: new KeyvRedis(
+                `redis://${config.CACHE_HOST}:${config.CACHE_PORT}`,
+              ),
+            }),
+            namespace: config.CACHE_KEY_PREFIX,
+          }),
+          inject: [Config],
         }),
       ],
       controllers: [TestController],

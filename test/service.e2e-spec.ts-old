@@ -1,0 +1,44 @@
+import { Test, TestingModule } from '@nestjs/testing'
+import { NestjsCacheableModule } from '../libs/nestjs-cacheable/src/nestjs-cacheable.module'
+import { NestjsCacheableService } from '../libs/nestjs-cacheable/src/nestjs-cacheable.service'
+import KeyvRedis from '@keyv/redis'
+import Keyv from 'keyv'
+
+describe('NestjsCacheableService (e2e)', () => {
+  let service: NestjsCacheableService
+  let moduleFixture: TestingModule
+
+  beforeEach(async () => {
+    const redisUrl = 'redis://default@localhost:6379'
+
+    moduleFixture = await Test.createTestingModule({
+      imports: [
+        NestjsCacheableModule.register({
+          secondary: new Keyv({ store: new KeyvRedis(redisUrl) }),
+        }),
+      ],
+    }).compile()
+
+    service = moduleFixture.get<NestjsCacheableService>(NestjsCacheableService)
+  })
+
+  afterEach(async () => {
+    await moduleFixture.close()
+  })
+
+  it('should set and get a value from the cache', async () => {
+    const key = 'test-key'
+    const value = { data: 'test-data' }
+
+    await service.set(key, value, 10000) // 10 second TTL
+
+    // Get from the service
+    const cachedValue = await service.get(key)
+    expect(cachedValue).toEqual(value)
+
+    // Get from the secondary store directly to confirm it was set
+    const secondaryStore = (service as any).cache.secondary
+    const secondaryValue = await secondaryStore.get(key)
+    expect(secondaryValue).toEqual(value)
+  })
+})
