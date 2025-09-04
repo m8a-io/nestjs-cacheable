@@ -1,4 +1,4 @@
-# @m8a-io/nestjs-cacheable
+# @m8a/nestjs-cacheable
 
 A flexible and powerful caching module for NestJS that provides an easy-to-use API for tiered caching (in-memory and Redis).
 
