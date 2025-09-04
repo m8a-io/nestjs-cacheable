@@ -2,6 +2,22 @@ import { ModuleMetadata } from '@nestjs/common/interfaces'
 import  Keyv from 'keyv'
 import type { KeyvStoreAdapter } from 'keyv'
 
+export type AnyFunction = (...args: any[]) => any
+
+export type CreateWrapKey = (
+    function_: AnyFunction,
+    arguments_: any[],
+    options?: WrapFunctionOptions,
+) => string
+
+export type WrapFunctionOptions = {
+    ttl?: number | string;
+    keyPrefix?: string;
+    createKey?: CreateWrapKey;
+    cacheErrors?: boolean;
+    cacheId?: string;
+};
+
 export interface CacheableOptions {
   primary?: Keyv | KeyvStoreAdapter
   secondary?: Keyv | KeyvStoreAdapter

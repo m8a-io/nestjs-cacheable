@@ -2,6 +2,7 @@ import { Inject, Injectable, Logger, OnModuleDestroy } from '@nestjs/common'
 import { CACHEABLE } from './constants'
 import { Cacheable } from 'cacheable'
 import { Keyv } from 'keyv'
+import { WrapFunctionOptions } from './interfaces/cacheable-options.interface'
 
 @Injectable()
 export class NestjsCacheableService implements OnModuleDestroy {
@@ -47,7 +48,7 @@ export class NestjsCacheableService implements OnModuleDestroy {
 
   wrap<T, Arguments extends any[]>(
     fn: (...args: Arguments) => Promise<T>,
-    options?: any,
+    options?: WrapFunctionOptions,
   ): (...args: Arguments) => Promise<T> {
     const wrappedFn = this.cache.wrap(fn, options)
     return wrappedFn
