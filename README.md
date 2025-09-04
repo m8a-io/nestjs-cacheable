@@ -10,7 +10,7 @@ pnpm add @m8a-io/nestjs-cacheable cacheable ioredis keyv @keyv/redis
 
 ## Motivation
 
-Nestjs' own cache-manager is good for getting the basics for caching going, but it leaves it up to you as a devland dev to use it properly throughout your application. This means, every devland dev using cache-manager will be doing the same things, like creating a caching interceptor for REST routes or creating a wrap function to for database call caching, creating two level caching  i.e. LRU memory caching as the L1 caching and a Redis store as L2 or secondary cache, etc. etc. 
+Nestjs' own cache-manager is good for getting the basics for caching going, but it leaves it up to you as a devland dev to use it properly throughout your application. This means, every devland dev using cache-manager will be doing the same things, like creating a caching interceptor for REST routes or creating a wrap function to cache database calls or creating two level caching  i.e. LRU memory caching as the L1 cache and a Redis store as an L2 or secondary cache, etc. etc. 
 
 This package has it all "built in", hopefully saving devland devs all of this effort. 
 
